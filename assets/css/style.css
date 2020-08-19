@@ -1,0 +1,64 @@
+/* styling for entire page */
+body {
+  background: linear-gradient(#3eb9de, #3a80de);
+  background-attachment: fixed;
+}
+
+/* styling for main content container */
+.container-fluid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+/* styling card container */
+.card {
+  background-color: #e5eff5;
+  margin: 5px;
+}
+
+.card-title {
+  text-align: center;
+}
+
+/* styling input box fiels and select fields */
+.select-css {
+  display: flex;
+  flex-grow: 1;
+  outline: none;
+  justify-content: center;
+  align-items: center;
+  border: 0.2px solid lightgray;
+  border-radius: 0px 2px 2px 0px;
+}
+
+/* styling delete task link */
+#delete-link {
+  color: red;
+  font-size: 20px;
+}
+
+#delete-link:hover {
+  color: green;
+}
+
+/* styling main button add and clear all button */
+#main-btn {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/* styling task category badge */
+.badge {
+  font-weight: 400;
+  color: white;
+}
+
+/* styling list item container */
+.item-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}

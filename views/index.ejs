@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <!-- link for font awesome sheet -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+  <!-- including page stylesheet -->
+  <link rel="stylesheet" href="/css/style.css" />
+  <!-- show title -->
+  <title><%= title %></title>
+</head>
+
+
+<body>
+  <!-- main content starts here -->
+  <div class="container-fluid">
+
+    <!-- contaiener to show alert messages -->
+    <div id="notify" class="alert alert-success" role="alert">
+      Task Added
+    </div>
+
+    <!-- card to display form to add new task -->
+    <div class="card" style="width: 500px;">
+      <div class="card-body">
+        <h5 class="card-title">MY TODO</h5>
+        <p class="card-text">
+          <!-- form to post task data  -->
+        <form action="/add" method="post">
+          <!-- task description input field container -->
+          <div class="form-group">
+            <label for="description">DESCRIPTION</label>
+            <input type="text" class="form-control" name="name" id="description" placeholder="eg. buy milk" required>
+          </div>
+          <!-- task type input field container -->
+          <div class="form-group">
+            <div class="input-group mb-3">
+
+              <div class="input-group-prepend">
+                <span class="input-group-text"> CATEGORY</span>
+              </div>
+              <select class="select-css" id="type" name="type" required>
+                <option value="">None</option>
+                <option value="Personal">Personal</option>
+                <option value="Work">Work</option>
+                <option value="College">College</option>
+                <option value="Others">Others</option>
+              </select>
+            </div>
+          </div>
+          <!-- task due date input field container -->
+          <div class="form-group">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"> DUE DATE</span>
+              </div>
+              <input type="date" class="form-control" name="deadline" id="duedate">
+            </div>
+          </div>
+          <!-- container for submit button and clear list button -->
+          <div id="main-btn" class="form-group">
+            <button type="submit" class="btn btn-success" id="taskadd"><i class="fas fa-plus"></i> Add Task</button>
+            <a href="/clear" class="btn btn-danger"><i class="far fa-trash-alt"></i> Clear List</a>
+          </div>
+
+
+        </form>
+
+        </p>
+
+      </div>
+    </div>
+
+    <!-- card container for showing added tasks list -->
+    <div class="card" style="width: 500px;">
+      <div class="card-body">
+        <h5 class="card-title">Items List</h5>
+        <p class="card-text">
+          <!-- loop to display all added task from db. -->
+        <ul class="list-group">
+          <%  for (todo of todos) { %>
+          <li class="list-group-item list-group-item-action ">
+
+            <div class="item-container">
+              <% if(todo.type=='Personal') { %>
+
+              <h6> <span class="badge badge-success"><%= todo.type  %></span></h6>
+
+              <% } %>
+              <%  if(todo.type=='Work') {%>
+
+              <h6> <span class="badge badge-primary"><%= todo.type  %></span></h6>
+
+              <% } %>
+              <%  if(todo.type=='College') {%>
+
+              <h6> <span class="badge badge-warning"><%= todo.type  %></span></h6>
+              <% } %>
+              <%  if(todo.type=='Others') {%>
+              <h6> <span class="badge badge-secondary"><%= todo.type  %></span></h6>
+
+              <% } %>
+
+
+              <span><%= todo.name  %> </span>
+
+              <%  if(todo.deadline.length==0) {%>
+
+              <span><i class="far fa-calendar-alt"></i> No Deadline</span>
+              <% } %>
+              <%  if(todo.deadline.length>0) {%>
+              <span><i class="far fa-calendar-alt"></i> <%= todo.deadline  %></span>
+              <% } %>
+
+              <!-- link to delete selected task -->
+              <a id="delete-link" href="/delete/<%= todo.id %>"><i class="fas fa-minus-circle"></i></a>
+
+            </div>
+          </li>
+          <% }%>
+        </ul>
+        </p>
+
+      </div>
+    </div>
+
+
+
+  </div>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+  <script src="/js/script.js"></script>
+</body>
+
+</html>
